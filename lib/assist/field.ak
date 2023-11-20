@@ -271,16 +271,21 @@ test simple_exp2() {
   exp(f, g, ff) == o
 }
 
-// inv (F u) = F (
-//   modulo 
-//     (snd $ f (u, 1) (fieldPrime (mempty :: c), 0))
-//     (fieldPrime (mempty :: c))
-//     )
+/// Calculates the inverse of a field element in a finite field.
+///
+/// The implementation in Haskell is shown below.
+///
+/// inv (F u) = F (
+///   modulo 
+///     (snd $ f (u, 1) (fieldPrime (mempty :: c), 0))
+///     (fieldPrime (mempty :: c))
+///     )
 pub fn inv(f: Field, ff: FiniteField) -> Field {
   let (_, snd) = do_inv((f, 1), (field_prime(ff), 0))
   snd % field_prime(ff)
 }
 
+// Recursively do the inverse on tuples of integers.
 fn do_inv(l: (Int, Int), r: (Int, Int)) -> (Int, Int) {
   let (x, y) = l
   let (xp, yp) = r
@@ -305,5 +310,42 @@ test simple_inv2() {
   let o = to_field_element(13725, ff)
   inv(f, ff) == o
 }
-/// This function computes x^y mod p.
-// pub fn pow(f: Field, n: Int, ff: FiniteField)
+// keep this as is for now
+// /// This function computes x^y mod p in a finite field.
+// ///
+// /// ```aiken
+// /// field.pow()
+// pub fn pow(f: Field, n: Int, ff: FiniteField) -> Field {
+//   if eq(f, zero, ff) {
+//     zero
+//   } else if n == 1 {
+//     one
+//   } else if n < 0 {
+//     pow(inv(f, ff), -n, ff)
+//   } else {
+//     let (q, r) = quot_rem(n, 2)
+//     if r == 1 {
+//       let g = mul(f, f, ff)
+//       mul(f, pow(g, q, ff), ff)
+//     } else {
+//       let g = mul(f, f, ff)
+//       pow(g, q, ff)
+//     }
+//   }
+// }
+
+// fn quot_rem(dividend: Int, divisor: Int) -> (Int, Int) {
+//   if divisor == 0 {
+//     fail @"Division by zero"
+//   } else {
+//     do_quot_rem(divisor, dividend, 0)
+//   }
+// }
+
+// fn do_quot_rem(divisor: Int, n: Int, count: Int) -> (Int, Int) {
+//   if n < divisor {
+//     (count, n)
+//   } else {
+//     do_quot_rem(divisor, n - divisor, count + 1)
+//   }
+// }
