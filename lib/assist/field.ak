@@ -129,7 +129,14 @@ test simple_add2() {
   add(f, g, ff) == o
 }
 
+/// Subtracts two field elements from each other in a finite field. 
+/// The implementation in Haskell is shown below.
+///
 /// (-) (F u) (F v) = F $ modulo (u - v) (fieldPrime (mempty :: c))
+///
+/// ```aiken
+/// field.sub(f, g, finite_field)
+/// ```
 pub fn sub(f: Field, g: Field, ff: FiniteField) -> Field {
   ( f - g ) % field_prime(ff)
 }
@@ -150,7 +157,14 @@ test simple_sub2() {
   sub(f, g, ff) == o
 }
 
+/// Checks for equality of two field elements in a finite field. 
+/// The implementation in Haskell is shown below.
+///
 /// (==) (F u) (F v) = modulo (u - v) (fieldPrime (mempty :: c)) == 0
+///
+/// ```aiken
+/// field.eq(f, g, finite_field)
+/// ```
 pub fn eq(f: Field, g: Field, ff: FiniteField) -> Bool {
   sub(f, g, ff) == 0
 }
@@ -161,18 +175,69 @@ test simple_eq() {
   eq(f, f, ff)
 }
 
+/// Multiply two field elements together in a finite field. The implementation
+/// in Haskell is shown below.
+///
 /// (*) (F u) (F v) = F $ modulo (u * v) (fieldPrime (mempty :: c))
+///
+/// ```aiken
+/// field.mul(f, g, finite_field)
+/// ```
 pub fn mul(f: Field, g: Field, ff: FiniteField) -> Field {
   f * g % field_prime(ff)
 }
 
+test simple_mul1() {
+  let ff = FiniteField { field_prime: 44203 }
+  let f = to_field_element(123, ff)
+  let g = to_field_element(321, ff)
+  let o = to_field_element(39483, ff)
+  mul(f, g, ff) == o
+}
+
+test simple_mul2() {
+  let ff = FiniteField { field_prime: 44203 }
+  let f = to_field_element(123456, ff)
+  let g = to_field_element(654321, ff)
+  let o = to_field_element(20154, ff)
+  mul(f, g, ff) == o
+}
+
+/// Checks if a field element is less than or equal to another field element
+/// in a finite field.
+///
+/// The implementation in Haskell is shown below.
+///
 /// (<=) (F a) (F b) = modulo a (fieldPrime (mempty :: c)) <= modulo b (fieldPrime (mempty :: c))
+///
+/// ```aiken
+/// field.leq(f, g, finite_field)
+/// ```
 pub fn leq(f: Field, g: Field, ff: FiniteField) -> Bool {
   let l = f % field_prime(ff)
   let r = g % field_prime(ff)
   l <= r
 }
 
+test simple_leq1() {
+  let ff = FiniteField { field_prime: 44203 }
+  let f = to_field_element(123, ff)
+  let g = to_field_element(321, ff)
+  leq(f, g, ff) == True
+}
+
+test simple_leq2() {
+  let ff = FiniteField { field_prime: 44203 }
+  let f = to_field_element(123456, ff)
+  let g = to_field_element(654321, ff)
+  leq(f, g, ff) == True
+}
+
+/// Exponentiation of a field element by some integer in a finite field. 
+///
+/// ```aiken
+/// field.exp(f, n, finite_field)
+/// ```
 pub fn exp(f: Field, n: Int, ff: FiniteField) -> Field {
   if n < 0 {
     exp(f, -n, ff)
@@ -188,6 +253,22 @@ pub fn exp(f: Field, n: Int, ff: FiniteField) -> Field {
       }
     }
   }
+}
+
+test simple_exp1() {
+  let ff = FiniteField { field_prime: 44203 }
+  let f = to_field_element(123, ff)
+  let g = 321
+  let o = to_field_element(7494, ff)
+  exp(f, g, ff) == o
+}
+
+test simple_exp2() {
+  let ff = FiniteField { field_prime: 44203 }
+  let f = to_field_element(123456, ff)
+  let g = 654321
+  let o = to_field_element(43174, ff)
+  exp(f, g, ff) == o
 }
 
 // inv (F u) = F (
@@ -209,6 +290,20 @@ fn do_inv(l: (Int, Int), r: (Int, Int)) -> (Int, Int) {
     let q = x / xp
     do_inv((xp, yp), (x - q * xp, y - q * yp))
   }
+}
+
+test simple_inv1() {
+  let ff = FiniteField { field_prime: 44203 }
+  let f = to_field_element(123, ff)
+  let o = to_field_element(2875, ff)
+  inv(f, ff) == o
+}
+
+test simple_inv2() {
+  let ff = FiniteField { field_prime: 44203 }
+  let f = to_field_element(123456, ff)
+  let o = to_field_element(13725, ff)
+  inv(f, ff) == o
 }
 /// This function computes x^y mod p.
 // pub fn pow(f: Field, n: Int, ff: FiniteField)
