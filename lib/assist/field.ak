@@ -20,7 +20,8 @@ test simple_field_prime() {
   field_prime(ff) == 2
 }
 
-/// This represents the individual elements of the finite field.
+/// This represents the individual elements of the finite field. Its just a 
+/// wrapper around the Int type.
 pub type Field =
   Int
 
@@ -79,14 +80,14 @@ test simple_from_field() {
   from_field_element(f, ff) == u
 }
 
-/// The zero field element.
+/// The zero, origin, field element.
 pub const zero: Field = 0
 
 /// The one field element.
 pub const one: Field = 1
 
 /// The empty finite field that acts as the identity element. The field
-/// prime is the one field element.
+/// prime is the `one` field element.
 ///
 /// This will change into a const at a later time.
 ///
