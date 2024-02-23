@@ -116,8 +116,16 @@ test simple_base_q() {
   base_q(17232, 4) == [1, 0, 0, 3, 1, 1, 0, 0]
 }
 
-test to_base_256() {
+test to_base_256_1() {
   base_q(78237623, 256) == [4, 169, 207, 183]
+}
+
+test to_base_256_2() {
+  base_q(math.pow(2, 8), 256) == [1, 0]
+}
+
+test to_base_256_3() {
+  base_q(math.pow(2, 8 * 3), 256) == [1, 0, 0, 0]
 }
 
 test to_base_large() {
@@ -184,6 +192,12 @@ test simple_from_int() {
 test complex_from_int() {
   let str: ByteArray = #"acabbeeffacecafe"
   let n: Int = to_int(str)
+  from_int(n) == str
+}
+
+test from_power_of_two1() {
+  let str: ByteArray = #"01000000"
+  let n: Int = math.pow(2, 8 * 3)
   from_int(n) == str
 }
 
