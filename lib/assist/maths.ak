@@ -1,7 +1,7 @@
 //// This module incorporates code for various mathematical operations.
 ////
 
-use aiken/bytearray
+use aiken/builtin
 use aiken/list
 use aiken/math
 
@@ -139,7 +139,7 @@ test to_base_large() {
 /// ```
 pub fn to_int(self: ByteArray) -> Int {
   // base 10 value of a hexadecimal number as a bytearray
-  bytearray.foldl(self, 0, fn(byte, acc) { acc * 256 + byte })
+  builtin.bytearray_to_integer(True, self)
 }
 
 test empty_string_to_int() {
@@ -159,8 +159,7 @@ test string_to_int() {
 /// maths.from_int(44203)
 /// ```
 pub fn from_int(self: Int) -> ByteArray {
-  let base_256: List<Int> = base_q(self, 256)
-  list.foldr(base_256, #"", fn(n, total) { bytearray.push(total, n) })
+  builtin.integer_to_bytearray(True, 0, self)
 }
 
 test odd_from_int() {
