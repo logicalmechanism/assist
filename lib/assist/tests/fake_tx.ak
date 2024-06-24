@@ -8,10 +8,11 @@ use aiken/transaction.{
   DatumHash, InlineDatum, Input, NoDatum, Output, OutputReference, Spend,
   Transaction, TransactionId,
 }
-use aiken/transaction/credential.{StakeCredential}
+use aiken/transaction/credential.{
+  Inline, StakeCredential, VerificationKeyCredential,
+}
 use aiken/transaction/value
 use assist/addresses
-use assist/credentials
 
 /// A test datum.
 pub const test_datum: ByteArray = #"acabbeeffacecafe"
@@ -34,7 +35,7 @@ pub fn test_out_ref() -> OutputReference {
 pub fn test_bad_out_ref() -> OutputReference {
   let out_ref: OutputReference =
     OutputReference {
-      transaction_id: TransactionId { hash: #"fade" },
+      transaction_id: TransactionId { hash: #"" },
       output_index: 1,
     }
   out_ref
@@ -45,7 +46,7 @@ pub fn test_inputs(amt: Int) -> List<Input> {
   let input: Input =
     Input {
       output_reference: OutputReference {
-        transaction_id: TransactionId { hash: #"acab" },
+        transaction_id: TransactionId { hash: #"" },
         output_index: 0,
       },
       output: Output {
@@ -81,7 +82,7 @@ pub fn test_script_input() -> Input {
   let input: Input =
     Input {
       output_reference: OutputReference {
-        transaction_id: TransactionId { hash: #"acab" },
+        transaction_id: TransactionId { hash: #"" },
         output_index: 0,
       },
       output: Output {
@@ -99,7 +100,7 @@ pub fn test_input_with_datum_hash() {
   let input: Input =
     Input {
       output_reference: OutputReference {
-        transaction_id: TransactionId { hash: #"acab" },
+        transaction_id: TransactionId { hash: #"" },
         output_index: 0,
       },
       output: Output {
@@ -117,7 +118,7 @@ pub fn test_bad_input() -> Input {
   let input: Input =
     Input {
       output_reference: OutputReference {
-        transaction_id: TransactionId { hash: #"acab" },
+        transaction_id: TransactionId { hash: #"" },
         output_index: 0,
       },
       output: Output {
@@ -286,7 +287,7 @@ pub fn test_signatories() -> List<ByteArray> {
 
 /// A fake transaction used for testing.
 pub fn test_tx() -> Transaction {
-  let sc: StakeCredential = credentials.create_stake_credential(#"face")
+  let sc: StakeCredential = Inline(VerificationKeyCredential(#"acab"))
   let out_ref: OutputReference = test_out_ref()
   let withdrawal =
     [Pair(sc, 100)]
@@ -351,8 +352,8 @@ pub fn test_tx() -> Transaction {
           reference_script: None,
         },
       ],
-      fee: value.zero(),
-      mint: value.to_minted_value(value.zero()),
+      fee: 0,
+      mint: value.zero(),
       certificates: [],
       withdrawals: withdrawal,
       validity_range: Interval {
@@ -369,6 +370,10 @@ pub fn test_tx() -> Transaction {
       redeemers: redeem,
       datums: dict.new(),
       id: TransactionId { hash: #"" },
+      votes: dict.new(),
+      proposal_procedures: [],
+      current_treasury_amount: None,
+      treasury_donation: None,
     }
   tx
 }

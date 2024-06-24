@@ -9,11 +9,10 @@ use aiken/transaction.{
   Transaction, TransactionId,
 }
 use aiken/transaction/credential.{
-  Address, Credential, Referenced, StakeCredential,
+  Address, Inline, StakeCredential, VerificationKeyCredential,
 }
-use aiken/transaction/value.{AssetName, PolicyId, Value}
+use aiken/transaction/value.{AssetName, Lovelace, PolicyId, Value}
 use assist/addresses
-use assist/credentials
 use assist/data
 // for testing only
 use assist/tests/fake_tx
@@ -105,7 +104,7 @@ test cant_find_input_by_ref() fail {
     []
   let out_ref: OutputReference =
     OutputReference {
-      transaction_id: TransactionId { hash: #"acab" },
+      transaction_id: TransactionId { hash: #"" },
       output_index: 0,
     }
   // this will fail
@@ -328,7 +327,7 @@ test cant_find_output_by_value() fail {
 /// find.stake_reward_by_sc(tx.withdrawals, datum.wallet.sc)
 /// ```
 pub fn stake_reward_by_sc(
-  withdraws: Pairs<StakeCredential, Int>,
+  withdraws: Pairs<StakeCredential, Lovelace>,
   stake_credential: StakeCredential,
 ) -> Int {
   when pairs.get_first(withdraws, stake_credential) is {
@@ -338,16 +337,15 @@ pub fn stake_reward_by_sc(
 }
 
 test find_stake_reward_by_sc() {
-  let withdrawal: Pairs<Referenced<Credential>, Int> =
-    fake_tx.test_tx().withdrawals
-  let sc: Referenced<Credential> = credentials.create_stake_credential(#"face")
+  let withdrawal: Pairs<StakeCredential, Int> = fake_tx.test_tx().withdrawals
+  let sc: StakeCredential = Inline(VerificationKeyCredential(#"acab"))
   stake_reward_by_sc(withdrawal, sc) == 100
 }
 
 test cant_find_stake_reward_by_sc() fail {
-  let withdrawal: Pairs<Referenced<Credential>, Int> =
+  let withdrawal: Pairs<StakeCredential, Int> =
     []
-  let sc: Referenced<Credential> = credentials.create_stake_credential(#"face")
+  let sc: StakeCredential = Inline(VerificationKeyCredential(#"acab"))
   // this will fail
   stake_reward_by_sc(withdrawal, sc) == 0
 }
