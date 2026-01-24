@@ -1,4 +1,6 @@
-# v0.x.y
+# vx.y.z
+
+# v0.6.0
 
 *This version is contains breaking changes.*
 

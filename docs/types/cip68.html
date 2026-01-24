@@ -7,8 +7,8 @@
     <meta name="theme-color" content="#eff1f5" media="(prefers-color-scheme: light)"/>
     <meta name="theme-color" content="#1e1e2e" media="(prefers-color-scheme: dark)"/>
     <link rel="icon" type="image/svg+xml" sizes="any" href="../favicon.svg"/>
-    <link rel="stylesheet" href="../css/index.css?v=1.1.5" type="text/css"/>
-    <link id="syntax-theme" rel="stylesheet" href="../css/atom-one-light.min.css?v=1.1.5"/>
+    <link rel="stylesheet" href="../css/index.css?v=1.1.21" type="text/css"/>
+    <link id="syntax-theme" rel="stylesheet" href="../css/atom-one-light.min.css?v=1.1.21"/>
   </head>
   <body class="prewrap-off theme-light drawer-closed">
     <script>
@@ -120,13 +120,13 @@
       <h2>
         <a href="../">Assist</a>
         <span id="project-version">
-          <span>v0.5.1 </span>
+          <span>v0.6.0 </span>
         </span>
         <script>
           "use strict";
 
           if ("undefined" !== typeof versionNodes) {
-            const currentVersion = "vv0.5.1";
+            const currentVersion = "vv0.6.0";
             if (! versionNodes.find(element => element.version === currentVersion)) {
               versionNodes.unshift({ version: currentVersion, url: "#" });
             }
@@ -222,6 +222,11 @@
   
     
         <li><a href="#version">version</a></li>
+
+      
+  
+    
+        <li><a href="#extra">extra</a></li>
 
       
   
@@ -437,7 +442,7 @@
         </a>
       </h2>
       
-        <a class="member-source" alt="view source" title="view source" target="_blank" href="https://github.com/logical-mechanism/Assist/blob/v0.5.1/lib/types/cip68.ak#L21-L24"></a>
+        <a class="member-source" alt="view source" title="view source" target="_blank" href="https://github.com/logical-mechanism/Assist/blob/v0.6.0/lib/types/cip68.ak#L21-L25"></a>
       
     </div>
     <div class="custom-type-constructors">
@@ -451,7 +456,7 @@ https://cips.cardano.org/cips/cip68/.</p>
         <li class="constructor-item">
           <div class="constructor-row">
             <svg class="icon icon-box"><use xlink:href="#icon-box"></use></svg>
-            <pre class="constructor-name"><code class="hljs aiken">CIP68 { metadata: Pairs&lt;Data, Data&gt;, version: Int }</code></pre>
+            <pre class="constructor-name"><code class="hljs aiken">CIP68 { metadata: Pairs&lt;Data, Data&gt;, version: Int, extra: Data }</code></pre>
           </div>
 	  
         </li>
@@ -475,7 +480,7 @@ https://cips.cardano.org/cips/cip68/.</p>
     <div class="member-name">
       <h2 id="prefix_100"><pre class="hljs language-aiken">prefix_100: ByteArray = #&quot;000643b0&quot;</pre></h2>
       
-        <a class="member-source" alt="view source" title="view source" target="_blank" href="https://github.com/logical-mechanism/Assist/blob/v0.5.1/lib/types/cip68.ak#L5-L5"></a>
+        <a class="member-source" alt="view source" title="view source" target="_blank" href="https://github.com/logical-mechanism/Assist/blob/v0.6.0/lib/types/cip68.ak#L5-L5"></a>
       
     </div>
     <div class="rendered-markdown"><p>(100) Reference Token Prefix
@@ -487,7 +492,7 @@ https://developers.cardano.org/docs/governance/cardano-improvement-proposals/cip
     <div class="member-name">
       <h2 id="prefix_222"><pre class="hljs language-aiken">prefix_222: ByteArray = #&quot;000de140&quot;</pre></h2>
       
-        <a class="member-source" alt="view source" title="view source" target="_blank" href="https://github.com/logical-mechanism/Assist/blob/v0.5.1/lib/types/cip68.ak#L9-L9"></a>
+        <a class="member-source" alt="view source" title="view source" target="_blank" href="https://github.com/logical-mechanism/Assist/blob/v0.6.0/lib/types/cip68.ak#L9-L9"></a>
       
     </div>
     <div class="rendered-markdown"><p>(222) Non-Fungible Token Prefix
@@ -499,7 +504,7 @@ https://developers.cardano.org/docs/governance/cardano-improvement-proposals/cip
     <div class="member-name">
       <h2 id="prefix_333"><pre class="hljs language-aiken">prefix_333: ByteArray = #&quot;0014df10&quot;</pre></h2>
       
-        <a class="member-source" alt="view source" title="view source" target="_blank" href="https://github.com/logical-mechanism/Assist/blob/v0.5.1/lib/types/cip68.ak#L13-L13"></a>
+        <a class="member-source" alt="view source" title="view source" target="_blank" href="https://github.com/logical-mechanism/Assist/blob/v0.6.0/lib/types/cip68.ak#L13-L13"></a>
       
     </div>
     <div class="rendered-markdown"><p>(333) Fungible Token Prefix
@@ -511,7 +516,7 @@ https://developers.cardano.org/docs/governance/cardano-improvement-proposals/cip
     <div class="member-name">
       <h2 id="prefix_444"><pre class="hljs language-aiken">prefix_444: ByteArray = #&quot;001bc280&quot;</pre></h2>
       
-        <a class="member-source" alt="view source" title="view source" target="_blank" href="https://github.com/logical-mechanism/Assist/blob/v0.5.1/lib/types/cip68.ak#L17-L17"></a>
+        <a class="member-source" alt="view source" title="view source" target="_blank" href="https://github.com/logical-mechanism/Assist/blob/v0.6.0/lib/types/cip68.ak#L17-L17"></a>
       
     </div>
     <div class="rendered-markdown"><p>(444) Rich-Fungible Token Prefix
@@ -533,7 +538,7 @@ https://developers.cardano.org/docs/governance/cardano-improvement-proposals/cip
         <div class="member-name">
           <h2 id="get"><pre class="hljs language-aiken">get(cip68: CIP68, key: Data) -&gt; Data</pre></h2>
           
-      	    <a class="member-source" alt="view source" title="view source" target="_blank" href="https://github.com/logical-mechanism/Assist/blob/v0.5.1/lib/types/cip68.ak#L32-L34"></a>
+      	    <a class="member-source" alt="view source" title="view source" target="_blank" href="https://github.com/logical-mechanism/Assist/blob/v0.6.0/lib/types/cip68.ak#L33-L35"></a>
           
         </div>
         <div class="rendered-markdown"><p>Attempt to find a data structure by a key inside the cip68 metadatum. If
@@ -549,11 +554,26 @@ nothing is found then fail.</p>
         <div class="member-name">
           <h2 id="version"><pre class="hljs language-aiken">version(metadata: CIP68) -&gt; Int</pre></h2>
           
-      	    <a class="member-source" alt="view source" title="view source" target="_blank" href="https://github.com/logical-mechanism/Assist/blob/v0.5.1/lib/types/cip68.ak#L53-L55"></a>
+      	    <a class="member-source" alt="view source" title="view source" target="_blank" href="https://github.com/logical-mechanism/Assist/blob/v0.6.0/lib/types/cip68.ak#L54-L56"></a>
           
         </div>
         <div class="rendered-markdown"><p>Return the version of the metadata.</p>
 <pre><code class="language-aiken">metadatum |&gt; cip68.version
+</code></pre>
+</div>
+      </div>
+    
+  
+  
+      <div class="member">
+        <div class="member-name">
+          <h2 id="extra"><pre class="hljs language-aiken">extra(metadata: CIP68) -&gt; Data</pre></h2>
+          
+      	    <a class="member-source" alt="view source" title="view source" target="_blank" href="https://github.com/logical-mechanism/Assist/blob/v0.6.0/lib/types/cip68.ak#L63-L65"></a>
+          
+        </div>
+        <div class="rendered-markdown"><p>Return the extra data of the metadata.</p>
+<pre><code class="language-aiken">metadatum |&gt; cip68.extra
 </code></pre>
 </div>
       </div>
@@ -637,8 +657,8 @@ nothing is found then fail.</p>
       </defs>
     </svg>
 
-    <script src="../js/highlight.min.js?v=1.1.5"></script>
-    <script src="../js/highlightjs-aiken.js?v=1.1.5"></script>
+    <script src="../js/highlight.min.js?v=1.1.21"></script>
+    <script src="../js/highlightjs-aiken.js?v=1.1.21"></script>
     <script>
       document.querySelectorAll("pre code").forEach((elem) => {
         if (elem.className === "") {
@@ -680,10 +700,10 @@ nothing is found then fail.</p>
     </script>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://unpkg.com/tippy.js@6"></script>
-    <script src="../js/lunr.min.js?v=1.1.5"></script>
-    <script src="../js/index.js?v=1731262126"></script>
+    <script src="../js/lunr.min.js?v=1.1.21"></script>
+    <script src="../js/index.js?v=1769283304"></script>
     <!-- Load the search index using JSONP to avoid CORS issues -->
-    <script src="../search-data.js?v=1731262126"></script>
+    <script src="../search-data.js?v=1769283304"></script>
     <script>
       void function() {
         if (typeof tippy !== "undefined") {

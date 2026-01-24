@@ -28,12 +28,12 @@ Pull requests are welcome, but we do recommend you open an issue to bring any id
 
 **Changelog**
 
-Please add an entry into [CHANGELOG.md](./CHANGELOG.md) when submitting changes. New entries should go into the top `# v0.x.y` section. This let's us keep track of unreleased changes for use in release notes.
+Please add an entry into [CHANGELOG.md](./CHANGELOG.md) when submitting changes. New entries should go into the top `# vx.y.z` section. This let's us keep track of unreleased changes for use in release notes.
 
 Example Contributions: 
 
 ```md
-# v0.x.y
+# vx.y.z
 
 - added some new thing
 - fixed that one thing
@@ -41,7 +41,7 @@ Example Contributions:
 - removed something
 ```
 
-Once a release is ready `# v0.x.y` gets replaced with a version number, i.e. `# v0.4.0`. Usually the maintainers will handle the section renaming along with creating a new empty `# v0.x.y` section at the top of the changelog. When releasing a new version the version number needs to be updated inside `README.md`, `aiken.toml`, and the `CHANGELOG.md`. Run the command below to do a fresh test and rebuild the docs for the final push.
+Once a release is ready `# vx.y.z` gets replaced with a version number, i.e. `# v0.4.0`. Usually the maintainers will handle the section renaming along with creating a new empty `# vx.y.z` section at the top of the changelog. When releasing a new version the version number needs to be updated inside `README.md`, `aiken.toml`, and the `CHANGELOG.md`. Run the command below to do a fresh test and rebuild the docs for the final push.
 
 ```bash
 rm -fr build docs

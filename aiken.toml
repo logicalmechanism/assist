@@ -1,5 +1,5 @@
 name = "logical-mechanism/Assist"
-version = "v0.5.1"
+version = "v0.6.0"
 compiler = "v1.1.21"
 plutus = "v3"
 license = "Apache-2.0"
