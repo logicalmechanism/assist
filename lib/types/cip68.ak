@@ -21,6 +21,7 @@ pub const prefix_444: ByteArray = #"001bc280"
 pub type CIP68 {
   metadata: Pairs<Data, Data>,
   version: Int,
+  extra: Data,
 }
 
 /// Attempt to find a data structure by a key inside the cip68 metadatum. If
@@ -52,4 +53,13 @@ fn do_get(cip68: Pairs<Data, Data>, key: Data) -> Data {
 /// ```
 pub fn version(metadata: CIP68) -> Int {
   metadata.version
+}
+
+/// Return the extra data of the metadata.
+///
+/// ```aiken
+/// metadatum |> cip68.extra
+/// ```
+pub fn extra(metadata: CIP68) -> Data {
+  metadata.extra
 }

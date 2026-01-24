@@ -1,10 +1,13 @@
 # v0.x.y
 
+*This version is contains breaking changes.*
+
 - Cleaning up registry documentation
 - Fiat Shamir transform is now public
 - The blake2b_224 hash is now used for the fiat shamir transform
 - Bump to aiken 1.1.21 and stdlib 3.0.0
 - Registry now aligns with new bitwise math
+- CIP68 type now has the extra field
 
 # v0.5.1
 
