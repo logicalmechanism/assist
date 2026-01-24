@@ -3,7 +3,8 @@
 - Cleaning up registry documentation
 - Fiat Shamir transform is now public
 - The blake2b_224 hash is now used for the fiat shamir transform
-- Bump to 1.1.16 and 2.2.0
+- Bump to aiken 1.1.21 and stdlib 3.0.0
+- Registry now aligns with new bitwise math
 
 # v0.5.1
 
